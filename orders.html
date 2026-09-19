@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Orders & Payments | Bless The Soul</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .admin-layout {
+            max-width: 1300px;
+            margin: 80px auto 3rem;
+            padding: 2rem;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+        }
+
+        .orders-table th, 
+        .orders-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+        }
+
+        .orders-table th {
+            background-color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        .badge {
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-paid { background-color: #1b4332; color: #758e4f; }
+        .badge-pending { background-color: #5c3d11; color: #f4a261; }
+        .badge-shipped { background-color: #1d3557; color: #457b9d; }
+
+        .status-select {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.3rem;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Admin Navigation Back to Main Store -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">BLESS THE SOUL <span style="font-size:0.7rem; color:var(--text-muted);">[ADMIN]</span></a>
+            <nav class="nav-links">
+                <a href="../index.html">View Store Front</a>
+                <a href="orders.html" class="active">Orders & Payments</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-layout">
+        <div class="admin-header">
+            <div>
+                <h2>ORDERS & PAYMENT MANAGEMENT</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">View live sales, customer receipts, and update shipping statuses.</p>
+            </div>
+            <button class="btn btn-secondary" onclick="clearAllOrders()">Clear Order History</button>
+        </div>
+
+        <table class="orders-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Items Purchased</th>
+                    <th>Total Paid</th>
+                    <th>Payment</th>
+                    <th>Fulfillment</th>
+                </tr>
+            </thead>
+            <tbody id="adminOrdersTableBody">
+                <!-- Javascript dynamic population -->
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        // Default Mock Orders for testing if no orders exist yet
+        const defaultMockOrders = [
+            {
+                id: 'BTS-982134',
+                date: 'Jul 21, 2026',
+                customer: { name: 'Mbuso N.', email: 'mbuso@example.com', address: 'Johannesburg, ZA' },
+                items: [{ name: 'Oversized Heavyweight Hoodie', price: 120 }],
+                total: 135.00,
+                paymentMethod: 'Credit Card',
+                paymentStatus: 'Paid',
+                fulfillmentStatus: 'Shipped'
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', renderAdminOrders);
+
+        function renderAdminOrders() {
+            let orders = JSON.parse(localStorage.getItem('bts_orders'));
+
+            // If empty, initialize with default mock order
+            if (!orders || orders.length === 0) {
+                orders = defaultMockOrders;
+                localStorage.setItem('bts_orders', JSON.stringify(orders));
+            }
+
+            const tbody = document.getElementById('adminOrdersTableBody');
+            tbody.innerHTML = orders.map((ord, idx) => {
+                const itemList = ord.items.map(i => i.name).join(', ');
+                return `
+                    <tr>
+                        <td><strong>${ord.id}</strong></td>
+                        <td>${ord.date}</td>
+                        <td>
+                            <strong>${ord.customer.name}</strong><br>
+                            <span style="color: var(--text-muted); font-size: 0.75rem;">${ord.customer.email}</span>
+                        </td>
+                        <td>${itemList}</td>
+                        <td><strong>$${ord.total.toFixed(2)}</strong></td>
+                        <td>
+                            <span class="badge badge-paid">${ord.paymentStatus}</span><br>
+                            <span style="font-size:0.75rem; color:var(--text-muted);">${ord.paymentMethod}</span>
+                        </td>
+                        <td>
+                            <select class="status-select" onchange="updateFulfillment(${idx}, this.value)">
+                                <option value="Processing" ${ord.fulfillmentStatus === 'Processing' ? 'selected' : ''}>Processing</option>
+                                <option value="Shipped" ${ord.fulfillmentStatus === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                                <option value="Delivered" ${ord.fulfillmentStatus === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                            </select>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function updateFulfillment(index, newStatus) {
+            let orders = JSON.parse(localStorage.getItem('bts_orders')) || [];
+            if (orders[index]) {
+                orders[index].fulfillmentStatus = newStatus;
+                localStorage.setItem('bts_orders', JSON.stringify(orders));
+                alert(`Order ${orders[index].id} updated to ${newStatus}`);
+            }
+        }
+
+        function clearAllOrders() {
+            if (confirm('Are you sure you want to clear order history?')) {
+                localStorage.removeItem('bts_orders');
+                renderAdminOrders();
+            }
+        }
+    </script>
+</body>
+</html>

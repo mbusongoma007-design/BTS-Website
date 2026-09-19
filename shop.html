@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Bless The Soul</title>
+    <link rel="stylesheet" href="css/shop.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">BLESS THE SOUL</a>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="shop.html" class="active">Shop</a>
+                <a href="collections.html">Collections</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            <div class="nav-icons">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero / Banner Section -->
+    <section class="page-banner">
+        <h1>THE SHOP</h1>
+        <p>BTS TEES COLLECTION — R400</p>
+    </section>
+
+    <!-- Main Shop Catalog -->
+    <main class="shop-grid">
+
+        <!-- Product 1: BTS White Front Cross Tee -->
+        <div class="product-card">
+            <div class="product-img-wrapper">
+                <img src="assets/_KNS9098 (1).JPG" alt="BTS Graphic Cross Tee White">
+            </div>
+            <div class="product-details">
+                <div>
+                    <h3 class="product-title">BTS Tee - Front Cross</h3>
+                    <p class="product-sub">Heavyweight Oversized Fit / White</p>
+                </div>
+                <div class="product-footer">
+                    <span class="product-price">R400.00</span>
+                    <button class="btn-add-cart" onclick="addToCart('BTS Tee - Front Cross', 400, 'YOUR_IMAGE_FOLDER/filename1.jpg')">Add to Bag</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 2: BTS Back Statement Tee -->
+        <div class="product-card">
+            <div class="product-img-wrapper">
+                <img src="assets/_KNS8945.JPG" alt="BTS Graphic Tee Back Statement Print">
+            </div>
+            <div class="product-details">
+                <div>
+                    <h3 class="product-title">BTS Tee - Back Statement</h3>
+                    <p class="product-sub">Bubble Logo Graffiti Print / White</p>
+                </div>
+                <div class="product-footer">
+                    <span class="product-price">R400.00</span>
+                    <button class="btn-add-cart" onclick="addToCart('BTS Tee - Back Statement', 400, 'YOUR_IMAGE_FOLDER/filename2.jpg')">Add to Bag</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 3: BTS Gold Cross Cream Tee -->
+        <div class="product-card">
+            <div class="product-img-wrapper">
+                <img src="assets/_KNS8961.JPG" alt="BTS Graphic Cross Tee Cream">
+            </div>
+            <div class="product-details">
+                <div>
+                    <h3 class="product-title">BTS Tee - Gold Cross</h3>
+                    <p class="product-sub">Heavyweight Vintage Fit / Cream</p>
+                </div>
+                <div class="product-footer">
+                    <span class="product-price">R400.00</span>
+                    <button class="btn-add-cart" onclick="addToCart('BTS Tee - Gold Cross', 400, 'YOUR_IMAGE_FOLDER/filename3.jpg')">Add to Bag</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 4: BTS Street Duo Edition -->
+        <div class="product-card">
+            <div class="product-img-wrapper">
+                <img src="assets/_KNS8987.JPG" alt="BTS Lookbook Balcony Edition">
+            </div>
+            <div class="product-details">
+                <div>
+                    <h3 class="product-title">BTS Tee - Street Duo</h3>
+                    <p class="product-sub">Urban Lookbook Edition</p>
+                </div>
+                <div class="product-footer">
+                    <span class="product-price">R400.00</span>
+                    <button class="btn-add-cart" onclick="addToCart('BTS Tee - Street Duo', 400, 'YOUR_IMAGE_FOLDER/filename4.jpg')">Add to Bag</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 5: BTS Stairway Mint Tee -->
+        <div class="product-card">
+            <div class="product-img-wrapper">
+                <img src="assets/_KNS9098.JPG" alt="BTS Capsule Stairway Lookbook">
+            </div>
+            <div class="product-details">
+                <div>
+                    <h3 class="product-title">BTS Tee - Mint Cross</h3>
+                    <p class="product-sub">Stairway Capsule / Pastel Mint</p>
+                </div>
+                <div class="product-footer">
+                    <span class="product-price">R400.00</span>
+                    <button class="btn-add-cart" onclick="addToCart('BTS Tee - Mint Cross', 400, 'YOUR_IMAGE_FOLDER/filename5.jpg')">Add to Bag</button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 BLESS THE SOUL. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        function addToCart(name, price, image) {
+            let cart = JSON.parse(localStorage.getItem('bts_cart')) || [];
+            cart.push({ name, price, image, currency: 'R' });
+            localStorage.setItem('bts_cart', JSON.stringify(cart));
+            
+            const countEl = document.getElementById('cartCount');
+            if(countEl) countEl.textContent = cart.length;
+
+            alert(`${name} added to your bag (R${price})!`);
+        }
+
+        // Initialize cart count on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('bts_cart')) || [];
+            const countEl = document.getElementById('cartCount');
+            if(countEl) countEl.textContent = cart.length;
+        });
+    </script>
+</body>
+</html>

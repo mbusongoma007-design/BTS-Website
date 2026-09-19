@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bless The Soul | Luxury Streetwear & Apparel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">BLESS THE SOUL</a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="active">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="collections.html">Collections</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+
+            <div class="nav-icons">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fa-solid =>-bag-shopping"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+                <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>ELEVATE YOUR ESSENCE</h1>
+            <p>Minimalist Luxury Streetwear Designed for Purpose</p>
+            <div class="hero-btns">
+                <a href="shop.html" class="btn btn-primary">Shop Collection</a>
+                <a href="about.html" class="btn btn-secondary">Our Story</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section class="section collections-preview">
+        <div class="section-title">
+            <h2>CURATED COLLECTIONS</h2>
+            <p>Explore the latest drops and essentials</p>
+        </div>
+        <div class="collection-grid">
+            <div class="collection-card">
+                <img src="assets/_KNS8945.JPG">
+                <div class="card-overlay">
+                    <h3>Outerwear</h3>
+                    <a href="collections.html" class="link-btn">Discover <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="collection-card">
+                <img src="assets/_KNS8961.JPG">
+                <div class="card-overlay">
+                    <h3>BTS Tees</h3>
+                    <a href="collections.html" class="link-btn">Discover <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="collection-card">
+                <img src="assets/_KNS8987.JPG">
+                <div class="card-overlay">
+                    <h3>BTS Tees</h3>
+                    <a href="collections.html" class="link-btn">Discover <i class="fa-solid fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="section new-arrivals">
+        <div class="section-title">
+            <h2>NEW ARRIVALS</h2>
+            <p>Freshly crafted pieces available now</p>
+        </div>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="assets/_KNS9098 (1).JPG">
+                    <button class="add-to-cart-btn" onclick="addToCart('BTS Tee', 120)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h4>BTS Tees</h4>
+                    <p class="price">R400</p>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="assets/_KNS8961.JPG">
+                    <button class="add-to-cart-btn" onclick="addToCart('BTS Tee', 65)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h4>BTS Tees</h4>
+                    <p class="price">R400</p>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="assets/_KNS8987.JPG">
+                    <button class="add-to-cart-btn" onclick="addToCart('BTS Tee', 140)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h4>BTS Tees</h4>
+                    <p class="price">R400</p>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="assets/_KNS8987.JPG">
+                    <button class="add-to-cart-btn" onclick="addToCart('BTS Tee', 45)">Add to Cart</button>
+                </div>
+                <div class="product-info">
+                    <h4>BTS Tees</h4>
+                    <p class="price">R400</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="newsletter-content">
+            <h2>JOIN THE INNER CIRCLE</h2>
+            <p>Subscribe for early access to drops, exclusive discounts, and editorial content.</p>
+            <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3 class="footer-logo">BLESS THE SOUL</h3>
+                <p>Premium streetwear focused on timeless design, heavy fabrics, and intentional craftsmanship.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="shop.html">Shop All</a></li>
+                    <li><a href="collections.html">Collections</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Help & Legal</h4>
+                <ul>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 BLESS THE SOUL. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
